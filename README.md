@@ -17,11 +17,12 @@ forever.
 Files live at the repo root, so the base url is `https://ivorcosta.github.io/guivo-files/` and each
 asset is that plus its filename.
 
-## Updating after a game deploy
+## Updating before a game deploy
 
-Copy the new `dist/assets` files of those five types into the repo root and push. Hashed names mean
-new builds add files rather than replace them, so prune names no longer referenced by a live build
-occasionally to keep the repo small.
+In the guivo repo, `npm run build` (in `src/main/resources/static/main`) ends by listing any `dist/assets`
+file of those five types that is missing here. Run `npm run cdn:sync` there to push them. It then waits
+until all three hops serve them. Hashed names mean new builds add files rather than replace them, so
+prune names no longer referenced by a live build occasionally to keep the repo small.
 
 A push to `main` also publishes the same files to Cloudflare Pages (project `guivo`) and the R2 bucket
 `guivo` via `.github/workflows/publish.yml`. Files deleted here are deleted there too. Run the workflow
