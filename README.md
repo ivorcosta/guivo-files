@@ -23,6 +23,11 @@ Copy the new `dist/assets` files of those five types into the repo root and push
 new builds add files rather than replace them, so prune names no longer referenced by a live build
 occasionally to keep the repo small.
 
+A push to `main` also publishes the same files to Cloudflare Pages (project `guivo`) and the R2 bucket
+`guivo` via `.github/workflows/publish.yml`. Files deleted here are deleted there too. Run the workflow
+manually to re-upload everything. It needs the repo secrets `CLOUDFLARE_API_TOKEN` (Pages Edit and R2
+Edit) and `CLOUDFLARE_ACCOUNT_ID`.
+
 ## Requirements this hop has to keep meeting
 
 - `Access-Control-Allow-Origin` on every response, or the browser blocks the load (Phaser fetches via
